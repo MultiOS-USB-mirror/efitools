@@ -1,3 +1,20 @@
+efitools - tools for manipulating EFI secure boot environments
+
+The upstream repository is currently
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git/
+
+And a very low volume mailing list for bugs and patches is set up at:
+
+  sbsigntools@groups.io
+
+(since sbsigntools is one of the secure boot utilities, we're sharing
+their list).  The list archives are available:
+
+  https://groups.io/g/sbsigntools/topics
+
+=================
+
 How to use these files
 
 simply typing make will build you everything including sample certificates for
