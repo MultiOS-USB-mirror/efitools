@@ -1,0 +1,23 @@
+image: ubuntu:focal
+
+build:
+  stage: build
+  before_script:
+    - echo "Europe/Warsaw" > /etc/timezone
+    - export DEBIAN_FRONTEND=noninteractive
+    - sed -i '/deb-src/s/^# //' /etc/apt/sources.list
+    - apt-get update && apt-get -y upgrade
+    - apt-get -y install sudo
+    - apt-get -y build-dep efitools
+    - adduser --disabled-password --gecos "" user
+  script:
+    - chown -R user .
+    - sudo -u user make
+  artifacts:
+    paths:
+      - HashTool.efi
+      - KeyTool.efi
+      - Loader.efi
+      - ReadVars.efi
+      - UpdateVars.efi
+  when: manual
