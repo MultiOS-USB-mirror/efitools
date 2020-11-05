@@ -117,8 +117,9 @@ pecoff_read_header(PE_COFF_LOADER_IMAGE_CONTEXT *context, void *data)
 	context->FirstSection = (EFI_IMAGE_SECTION_HEADER *)((char *)PEHdr + PEHdr->Pe32.FileHeader.SizeOfOptionalHeader + sizeof(UINT32) + sizeof(EFI_IMAGE_FILE_HEADER));
 
 	if (context->SecDir->VirtualAddress >= context->ImageSize) {
+		Print(L"secdir vaddr 0x%x >= ImageSize 0x%x\n",
+		      context->SecDir->VirtualAddress, context->ImageSize);
 		Print(L"Malformed security header\n");
-		return EFI_INVALID_PARAMETER;
 	}
 
 	return EFI_SUCCESS;

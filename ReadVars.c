@@ -109,11 +109,15 @@ efi_main (EFI_HANDLE image, EFI_SYSTEM_TABLE *systab)
 	InitializeLib(image, systab);
 
 	if (GetOSIndications() & EFI_OS_INDICATIONS_TIMESTAMP_REVOCATION) {
-		variables = (CHAR16 *[]){ L"PK", L"KEK", L"db", L"dbx", L"dbt", L"MokList" , NULL};
-		owners = (EFI_GUID []){ GV_GUID, GV_GUID, SIG_DB, SIG_DB, SIG_DB, MOK_OWNER };
+		variables = (CHAR16 *[]){ L"PK", L"KEK", L"db", L"dbx", L"dbt",
+					  L"MokList", L"MokListX", NULL};
+		owners = (EFI_GUID []){ GV_GUID, GV_GUID, SIG_DB, SIG_DB,
+					SIG_DB, MOK_OWNER, MOK_OWNER };
 	} else {
-		variables = (CHAR16 *[]){ L"PK", L"KEK", L"db", L"dbx", L"MokList" , NULL};
-		owners = (EFI_GUID []){ GV_GUID, GV_GUID, SIG_DB, SIG_DB, MOK_OWNER };
+		variables = (CHAR16 *[]){ L"PK", L"KEK", L"db", L"dbx",
+					  L"MokList", L"MokListX", NULL};
+		owners = (EFI_GUID []){ GV_GUID, GV_GUID, SIG_DB, SIG_DB,
+					MOK_OWNER, MOK_OWNER };
 	}
 
 	status = argsplit(image, &argc, &ARGV);

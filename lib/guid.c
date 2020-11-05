@@ -47,8 +47,10 @@ compare_guid(EFI_GUID *g1, EFI_GUID *g2)
 EFI_GUID *
 get_owner_guid(char *var)
 {
-	char *variables[] = { "PK", "KEK", "db", "dbx", "dbt", "MokList" };
-	EFI_GUID *owners[] = { &GV_GUID, &GV_GUID, &SIG_DB, &SIG_DB, &SIG_DB, &MOK_OWNER };
+	char *variables[] = { "PK", "KEK", "db", "dbx", "dbt", "MokList",
+			      "MokListX" };
+	EFI_GUID *owners[] = { &GV_GUID, &GV_GUID, &SIG_DB, &SIG_DB, &SIG_DB,
+			       &MOK_OWNER, &MOK_OWNER };
 	EFI_GUID *owner = NULL;
 	int i;
 
