@@ -405,8 +405,13 @@ add_new_key(int key, UINTN options)
 {
 	CHAR16 *title[3];
 	/* PK update must be signed: so require .auth file */
-	CHAR16 *ext = (key != KEY_PK && variable_is_setupmode())
-		? L".esl|.auth|.cer" : L".auth";
+	CHAR16 *ext;
+
+	if (key != KEY_PK && (variable_is_setupmode()
+			      || keyinfo[key].authenticated == 0))
+		ext = L".esl|.auth|.cer";
+	else
+		ext = L".auth";
 
 	title[0] = L"Select File containing additional key for";
 	title[1] = keyinfo[key].text;
