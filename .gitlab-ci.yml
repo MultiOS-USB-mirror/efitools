@@ -1,23 +1,20 @@
-image: ubuntu:focal
+image: ubuntu:22.04
 
 build:
   stage: build
   before_script:
-    - echo "Europe/Warsaw" > /etc/timezone
+    - echo "Europe/Berlin" > /etc/timezone
     - export DEBIAN_FRONTEND=noninteractive
     - sed -i '/deb-src/s/^# //' /etc/apt/sources.list
-    - apt-get update && apt-get -y upgrade
-    - apt-get -y install sudo
-    - apt-get -y build-dep efitools
+    - apt update
+    - apt upgrade -y
+    - apt install -y sudo
+    - apt build-dep -y efitools
     - adduser --disabled-password --gecos "" user
   script:
     - chown -R user .
     - sudo -u user make
   artifacts:
     paths:
-      - HashTool.efi
       - KeyTool.efi
-      - Loader.efi
-      - ReadVars.efi
-      - UpdateVars.efi
   when: manual
